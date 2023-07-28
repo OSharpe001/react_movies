@@ -2,6 +2,13 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import Form from './components/Form';
 import MovieDisplay from './components/MovieDisplay';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  width: 80%;
+  margin: auto;
+  text-align: center;
+`
 
 function App() {
 
@@ -30,10 +37,11 @@ function App() {
 
   return (
 
-    <div className="App">
+    // <Container className="App">
+    <Container >
       <Form movieSearch={getMovie} />
       <MovieDisplay movie={movie}/>
-    </div>
+    </Container>
   );
 }
 
