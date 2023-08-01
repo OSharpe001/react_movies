@@ -1,7 +1,7 @@
-// import styled from 'styled-components';
+import { Input, ButtonInput, Forms, FormH2 } from "./Styled";
 import { useState } from "react";
 
-function Form({ movieSearch }) {
+export default function Form({ movieSearch }) {
 
     const [formData, setFormData] = useState({
         searchTerm: "",
@@ -12,7 +12,6 @@ function Form({ movieSearch }) {
             ...formData,
             searchTerm: target.value
         });
-        // console.log(formData.searchTerm);
     };
 
     const handleSubmit = (e) => {
@@ -23,12 +22,11 @@ function Form({ movieSearch }) {
 
   return (
     <div>
-        <form action="">
-            <input type="text" value={formData.searchTerm} onChange={handleInputChange} />
-            <input type="submit" value="submit" onClick={handleSubmit}/>
-        </form>
+        <Forms action="">
+            <FormH2>Pick a movie, any movie...</FormH2>
+            <Input type="text" value={formData.searchTerm} onChange={handleInputChange} />
+            <ButtonInput type="submit" value="submit" onClick={handleSubmit}/>
+        </Forms>
     </div>
-  )
-}
-
-export default Form;
+  );
+};

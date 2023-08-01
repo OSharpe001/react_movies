@@ -1,54 +1,54 @@
-import React from 'react';
-import styled from 'styled-components';
+import { Title, Info, Image, Button } from "./Styled";
+import { useState } from "react";
 
-const Title = styled.h1`
-    color: red;
-    font-size: 3em;
-`
+export default function MovieDisplay({ movie }) {
 
-function MovieDisplay({ movie }) {
+    const [showingMoreInfo, setShowingMoreInfo] = useState(false);
 
-    // console.log(movie);
+    const changeInfoVisibility = () => {
+        setShowingMoreInfo(!showingMoreInfo);
+    };
 
-  return (
-    <div>
-        <>
-            {movie ?
+    const loaded = () => (
+        <div>
+            <>
+                <Title>{movie.Title}</Title>
+                <Image src={movie.Poster} alt={movie.Title} />
+                <Info>Released: {movie.Released}</Info>
+                <Info>Genre: {movie.Genre}</Info>
+                <Info>Rated: {movie.Rated}</Info>
+                <Info>Plot: {movie.Plot || "N/A"}</Info>
+
+                <Button onClick={changeInfoVisibility}>{showingMoreInfo? "Less Info": "More Info"}</Button>
+                {showingMoreInfo ?
                 <>
-                    {/* <h1>{movie.Title}</h1> */}
-                    <Title>{movie.Title}</Title>
-                    <img src={movie.Poster} alt={movie.Title} />
-                    <h3>Released: {movie.Released}</h3>
-                    <h3>Genre: {movie.Genre}</h3>
-                    <h3>Rated: {movie.Rated}</h3>
-                    <h3>Genre: {movie.Genre}</h3>
-                    <h3>Runtime: {movie.Runtime}</h3>
-                    <h3>Actors: {movie.Actors}</h3>
-                    <h3>Plot: {movie.Plot}</h3>
-                    <h3>Writer: {movie.Writer}</h3>
-                    <h3>Director: {movie.Director}</h3>
-                    <h3>BoxOffice: {movie.BoxOffice}</h3>
-                    <h3>Awards: {movie.Awards}</h3>
-                    
-                    
-                    
-                    <h3>Director: {movie.Director}</h3>
-                    <h3>Country: {movie.Country}</h3>
-                    <h3>Language: {movie.Language}</h3>
+                    <Info>Runtime: {movie.Runtime || "N/A"}</Info>
+                    <Info>Actors: {movie.Actors || "N/A"}</Info>
+                    <Info>Writer: {movie.Writer || "N/A"}</Info>
+                    <Info>Director: {movie.Director || "N/A"}</Info>
+                    <Info>BoxOffice: {movie.BoxOffice || "N/A"}</Info>
+                    <Info>Awards: {movie.Awards || "N/A"}</Info>
 
-                    <h3>Metascore: {movie.Metascore}</h3>
-                    <h3>Metacritic Rating: {movie.Ratings[0].Value}</h3>
-                    <h3>Internet Movie Database Rating: {movie.Ratings[0].Value}</h3>
-                    <h3>Rotten Tomatoes Rating: {movie.Ratings[1].Value}</h3>
-                    <h3>imdbRating: {movie.imdbRating} - imdbVotes: {movie.imdbVotes}</h3>
-                    {/* <h3>imdbVotes: {movie.imdbVotes}</h3> */}
+                    <Info>Language: {movie.Language || "N/A"}</Info>
+                    <Info>Country: {movie.Country || "N/A"}</Info>
+                    <Info>Metascore: {movie.Metascore || "N/A"}</Info>
+                    <Info>Metacritic Rating: {movie.Ratings[0].Value || "N/A"}</Info>
+                    <Info>Internet Movie Database Rating: {movie.Ratings[0].Value || "N/A"}</Info>
+                    <Info>Rotten Tomatoes Rating: {movie.Ratings[1].Value || "N/A"}</Info>
+                    <Info>imdbRating: {movie.imdbRating || "N/A"} - imdbVotes: {movie.imdbVotes || "N/A"}</Info>
                 </>
-            :
-                <h2>Type in a movie to get started...</h2>
-            }
-        </>
-    </div>
-  )
-}
+                :
+                    null
+                }
+            </>
+        </div>
+    );
 
-export default MovieDisplay
+    const loading = () => (
+        <h2>Type in a movie to get started...</h2>
+    );
+
+    return movie ? loaded() : loading();
+
+};
+
